@@ -258,20 +258,21 @@ public class Database {
 		}
 
 	}
-	public void insertResult(int stid, String suid, String emp_type, String epass) throws Exception {
+	public void insertResult(int stid, String suid, String semester, String grade, int retry) throws Exception {
 		// TODO Auto-generated method stub
 		try {
 			conn.setAutoCommit(false);
 			Statement stmt = conn.createStatement();
 
 
-			String sql = "insert into emp values(?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "insert into emp values(?, ?, ?, ?, ?)";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			//System.out.println("!!!!");
-			pstmt.setInt(1, eid);
-			pstmt.setString(2, ename);
-			pstmt.setString(3, emp_type);
-			pstmt.setString(4, epass);
+			pstmt.setInt(1, stid);
+			pstmt.setString(2, suid);
+			pstmt.setString(3, semester);
+			pstmt.setString(4, grade);
+			pstmt.setInt(5, retry);
 			
 
 			//System.out.println("!!!!");

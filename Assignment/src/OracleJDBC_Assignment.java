@@ -16,11 +16,14 @@ public class OracleJDBC_Assignment {
 			db.selectEMP();
 			db.selectDEPT();
 			
+			/*
 			db.callStoredProc();
 			db.selectEMP();
 			db.selectDEPT();
 			//db.insertEMP();
+			*/
 			
+<<<<<<< HEAD
 			//db.insertEMP(100,"김동욱","M","STUDENT","대구",10,100,1500,500,"18/11/02");
 			db.selectEMP();
 			db.selectDEPT();
@@ -40,6 +43,22 @@ public class OracleJDBC_Assignment {
 			db.deleteEMP("김동욱");
 			db.selectEMP();
 			db.selectDEPT();
+=======
+			// login select
+			int usertype = 0; // 이용자 타입.
+			switch(usertype) {
+				case 0: // 학생
+					while(true) {
+						if(true) break; // 탈출조건
+					}
+				break;
+				
+				case 1: // 교직원
+					while(true) {
+						if(true) break; // 탈출조건
+					}
+			}
+>>>>>>> branch 'master' of https://github.com/hero526/dbproject.git
 			
 			
 			db.close();
