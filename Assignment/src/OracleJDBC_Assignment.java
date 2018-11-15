@@ -16,30 +16,27 @@ public class OracleJDBC_Assignment {
 			db.selectEMP();
 			db.selectDEPT();
 			
+			/*
 			db.callStoredProc();
 			db.selectEMP();
 			db.selectDEPT();
 			//db.insertEMP();
+			*/
 			
-			db.insertEMP(100,"김동욱","M","STUDENT","대구",10,100,1500,500,"18/11/02");
-			db.selectEMP();
-			db.selectDEPT();
-			
-			db.updateEMPSalary(1000, "김동욱");
-			db.selectEMP();
-			db.selectDEPT();
-			
-			db.updateEMPSalary(2000, "김동욱");
-			db.selectEMP();
-			db.selectDEPT();
-			
-			db.updateEMPDid(300, "김동욱");
-			db.selectEMP();
-			db.selectDEPT();
-			
-			db.deleteEMP("김동욱");
-			db.selectEMP();
-			db.selectDEPT();
+			// login select
+			int usertype = 0; // 이용자 타입.
+			switch(usertype) {
+				case 0: // 학생
+					while(true) {
+						if(true) break; // 탈출조건
+					}
+				break;
+				
+				case 1: // 교직원
+					while(true) {
+						if(true) break; // 탈출조건
+					}
+			}
 			
 			
 			db.close();
