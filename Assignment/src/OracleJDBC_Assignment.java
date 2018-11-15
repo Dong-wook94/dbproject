@@ -21,7 +21,7 @@ public class OracleJDBC_Assignment {
 			db.selectDEPT();
 			//db.insertEMP();
 			
-			db.insertEMP(100,"±èµ¿¿í","M","STUDENT","´ë±¸",10,100,1500,500,"18/11/02");
+			//db.insertEMP(100,"±èµ¿¿í","M","STUDENT","´ë±¸",10,100,1500,500,"18/11/02");
 			db.selectEMP();
 			db.selectDEPT();
 			
