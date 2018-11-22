@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
     
-<%@ page import="com.example.*" %>
+<%@ page import="jdbc.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +14,6 @@
 	col: <input name="s" type="text"/><p>
 	<button type="submit">select</button><p>
 </form>
-<% TestClass.Test(); %>
+<% OracleJDBC_Assignment.start(); %>
 </body>
 </html>
