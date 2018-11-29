@@ -1,8 +1,8 @@
+<!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
     
 <%@ page import="jdbc.*" %>
-<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="EUC-KR">
@@ -49,14 +49,12 @@
 			<h2 class="card-title text-center" style="color:#113366;">APLUS</h2>
 		</div>
 		<div class="card-body">
-              <h5 class="form-signin-heading">로그인</h5>
-              <label for="inputEmail" class="sr-only">학번 또는 교직원 번호</label>
-              <input type="text" id="id" class="form-control" name="username" placeholder="학번 또는 교직원 번호" required autofocus><BR>
-              <label for="inputPassword" class="sr-only">비밀번호</label>
-              <input type="password" id="pw" class="form-control" name="password" placeholder="비밀번호" required><br>
+              <h5 class="form-signin-heading">비밀번호 변경</h5>
+              <input type="text" id="old_pw" class="form-control" name="username" placeholder="기존비밀번호" required autofocus><BR>
+              <input type="text" id="new_pw" class="form-control" name="username" placeholder="새 비밀번호" required autofocus><BR>
+              <input type="password" id="new_pw2" class="form-control" name="password" placeholder="새 비밀번호 확인" required><br>
 
-              <button class="btn btn-lg btn-primary btn-block" onclick="login(0)" >학생 로그인</button>
-                   <button  class="btn btn-lg btn-primary btn-block" onclick="login(1)">교직원 로그인</button>
+              <button class="btn btn-lg btn-primary btn-block" onclick="chPw()" >변경</button>
                    
 	
       
@@ -73,21 +71,24 @@
 <%
 	String fail = "";
 	try{
-
+		
 		if(Integer.parseInt(request.getParameter("success")) == 0)
 			fail = "아이디가 없거나 비밀번호가 틀립니다.";
 	}catch(Exception e){}
 %>
 <script>
-function login(mode) {
-	var id = document.getElementById("id").value;
-	var pw = document.getElementById("pw").value;
+function chPw() {
+	var old_pw = document.getElementById("old_pw").value;
+	var new_pw = document.getElementById("new_pw").value;
+	var new_pw2 = document.getElementById("new_pw2").value;
 	
-	if (mode == 0) {
-		window.location.href = "LoginAction.jsp?mode=0&id=" + id + "&pw=" + pw;
-	} else {
-		window.location.href = "LoginAction.jsp?mode=1&id=" + id + "&pw=" + pw;
+	if(new_pw == new_pw2)
+		window.location.href = "changePasswordAction.jsp?mode="+<%=request.getParameter("mode")%>+"&id=" + <%=request.getParameter("id")%> + "&new_pw=" + new_pw+"&old_pw="+old_pw;
+	else{
+		alert("새 비밀번호가 일치하지 않습니다.");
 	}
+		
+	
 }
 </script>
 <h5 style="text-align:center; color:white"><%=fail%></h5>
