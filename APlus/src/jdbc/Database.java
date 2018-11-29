@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Database {
 
@@ -15,11 +16,11 @@ public class Database {
 	private Connection conn =null;
 
 
-	public Database(String url, String user, String pass) {
+	public Database() {
 		// TODO Auto-generated constructor stub
-		this.url = url;
-		this.user = user;
-		this.pass = pass;
+		this.url = "jdbc:oracle:thin:@localhost:1521:oraknu";
+		this.user = "project";
+		this.pass = "project";
 	}
 
 
@@ -49,99 +50,84 @@ public class Database {
 			throw e;
 		}
 	}
+	
+	public ArrayList<Student> SelectStudentQuery(String query) throws Exception{
+		conn.setAutoCommit(false);//ø¿≈‰ƒøπ‘
+		Statement stmt = conn.createStatement();
 
-	public void setAllMaxSalaryZero() throws Exception{
-		try {
-
-			conn.setAutoCommit(false);//ø¿≈‰ƒøπ‘
-			Statement stmt = conn.createStatement();
-
-			String sql;
-			int result;
-			sql = "update dept set max_salary=0 where did = 100";
-			result = stmt.executeUpdate(sql);
-			System.out.println(result + " row updated");
-
-			sql = "update dept set max_salary=0 where did = 300";
-			result = stmt.executeUpdate(sql);
-			System.out.println(result + " row updated");
-
-			sql = "update dept set max_salary=0 where did = 400";
-			result = stmt.executeUpdate(sql);
-			System.out.println(result + " row updated");
-
-			sql = "update dept set max_salary=0 where did = 700";
-			result = stmt.executeUpdate(sql);
-			System.out.println(result + " row updated");
-
-			conn.commit();
-			conn.setAutoCommit(true);
-			stmt.close();
-			//conn.close();
-		}catch(Exception e){
-			System.err.println("sql erro =  " + e.getMessage());
-			throw e;
+		ResultSet rs = stmt.executeQuery(query);
+		ArrayList<Student> aList = new ArrayList<Student>();
+		while (rs.next()) {
+			aList.add(new Student(rs.getInt("stid"),rs.getString("stname"),rs.getString("stpass"),
+					rs.getString("major"),rs.getInt("styear"),rs.getDouble("avg_grade")));
 		}
+		rs.close();
+		conn.commit();
+		conn.setAutoCommit(true);
+		stmt.close();
+		return aList;
 	}
-	public void selectEMP() throws Exception {
-		// TODO Auto-generated method stub
+	public ArrayList<Employee> SelectEmployeeQuery(String query) throws Exception{
+		conn.setAutoCommit(false);//ø¿≈‰ƒøπ‘
+		Statement stmt = conn.createStatement();
 
-		try {
-			conn.setAutoCommit(false);//ø¿≈‰ƒøπ‘
-			Statement stmt = conn.createStatement();
-
-			System.out.println("EMP √‚∑¬");
-			String query = "select * from emp";
-			ResultSet rs = stmt.executeQuery(query);
-			while (rs.next()) {
-				int eid = rs.getInt("eid");
-				String ename = rs.getString("ename");
-				int did = rs.getInt("did");
-				int salary = rs.getInt("salary");
-				System.out.println(" EID= "+ eid + ", ENAME= "+ ename+", DID= "+did+", SALARY= "+salary);
-			}
-			rs.close();
-			conn.commit();
-			conn.setAutoCommit(true);
-			stmt.close();
-			//conn.close();
-		}catch(Exception e){
-			System.err.println("sql erro =  " + e.getMessage());
-			throw e;
+		ResultSet rs = stmt.executeQuery(query);
+		ArrayList<Employee> aList = new ArrayList<Employee>();
+		while (rs.next()) {
+			aList.add(new Employee(rs.getInt("eid"),rs.getString("ename"),rs.getString("emp_type"),
+					rs.getString("epass")));
 		}
-
+		rs.close();
+		conn.commit();
+		conn.setAutoCommit(true);
+		stmt.close();
+		return aList;
 	}
+	public ArrayList<Result> SelectResultQuery(String query) throws Exception{
+		conn.setAutoCommit(false);//ø¿≈‰ƒøπ‘
+		Statement stmt = conn.createStatement();
 
-
-	public void selectDEPT() throws Exception {
-		// TODO Auto-generated method stub
-		try {
-
-			conn.setAutoCommit(false);//ø¿≈‰ƒøπ‘
-			Statement stmt = conn.createStatement();
-
-			System.out.println("DEPT √‚∑¬");
-			String query = "select * from dept";
-			ResultSet rs = stmt.executeQuery(query);
-			while (rs.next()) {
-				int did = rs.getInt("did");
-				String dname = rs.getString("dname");
-				int max_salary = rs.getInt("max_salary");
-				System.out.println(" DID= "+ did + ", DNAME= "+ dname+", MAX_SALARY= "+max_salary);
-			}
-			rs.close();
-			conn.commit();
-			conn.setAutoCommit(true);
-			stmt.close();
-			//conn.close();
-		}catch(Exception e){
-			System.err.println("sql erro =  " + e.getMessage());
-			throw e;
+		ResultSet rs = stmt.executeQuery(query);
+		ArrayList<Result> aList = new ArrayList<Result>();
+		while (rs.next()) {
+			aList.add(new Result(rs.getInt("stid"),rs.getString("suid"),rs.getString("semester"),
+					rs.getString("grade"),rs.getInt("retry")));
 		}
+		rs.close();
+		conn.commit();
+		conn.setAutoCommit(true);
+		stmt.close();
+		return aList;
+	}
+	public ArrayList<Subject> SelectSubjectQuery(String query) throws Exception{
+		conn.setAutoCommit(false);//ø¿≈‰ƒøπ‘
+		Statement stmt = conn.createStatement();
+
+		ResultSet rs = stmt.executeQuery(query);
+		ArrayList<Subject> aList = new ArrayList<Subject>();
+		while (rs.next()) {
+			aList.add(new Subject(rs.getString("suid"),rs.getString("semester"),rs.getInt("eid"),
+					rs.getString("sufield"),rs.getInt("credit"),rs.getInt("dcredit"),rs.getInt("necessary")));
+		}
+		rs.close();
+		conn.commit();
+		conn.setAutoCommit(true);
+		stmt.close();
+		return aList;
+	}
+	public void DMLCustomQuery(String sql) throws Exception{
+		conn.setAutoCommit(false);//ø¿≈‰ƒøπ‘
+		Statement stmt = conn.createStatement();
+		
+		int result = stmt.executeUpdate(sql);
+		
+		conn.commit();
+		conn.setAutoCommit(true);
+		stmt.close();
 	}
 
 
-	public void callStoredProc() throws Exception{
+	/*public void callStoredProc() throws Exception{
 		try {
 			conn.setAutoCommit(false);
 
@@ -159,206 +145,6 @@ public class Database {
 			System.err.println("Sql error = " + e.getMessage());
 			throw e;
 		}
-	}
-	public void insertStudent(int stid, String stname, String stpass, String major, int styear, double avg_grade) throws Exception {
-		// TODO Auto-generated method stub
-		try {
-			conn.setAutoCommit(false);
-			Statement stmt = conn.createStatement();
-
-
-			String sql = "insert into emp values(?, ?, ?, ?, ?, ?)";
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			//System.out.println("!!!!");
-			pstmt.setInt(1, stid);
-			pstmt.setString(2, stname);
-			pstmt.setString(3, stpass);
-			pstmt.setString(4, major);
-
-			pstmt.setInt(5, styear);
-			pstmt.setDouble(6, avg_grade);
-
-			//System.out.println("!!!!");
-			int result = pstmt.executeUpdate();
-			System.out.println(result + " row inserted");
-			pstmt.close();
-
-			conn.commit();
-			conn.setAutoCommit(true);
-			stmt.close();
-			//conn.close();
-		} catch(Exception e) {
-			System.err.println("sql error = " +
-					e.getMessage());
-		}
-
-	}
-	public void insertSubject(String suid, String semester, String suname, int eid, int sufield, int credit,int dcredit, int necessary) throws Exception {
-		// TODO Auto-generated method stub
-		try {
-			conn.setAutoCommit(false);
-			Statement stmt = conn.createStatement();
-
-
-			String sql = "insert into emp values(?, ?, ?, ?, ?, ?, ?, ?)";
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			//System.out.println("!!!!");
-			pstmt.setString(1, suid);
-			pstmt.setString(2, semester);
-			pstmt.setString(3, suname);
-			pstmt.setInt(4, eid);
-			pstmt.setInt(5, sufield);
-			pstmt.setInt(6, credit);
-			pstmt.setInt(7, dcredit);
-			pstmt.setInt(8, necessary);
-			
-
-			//System.out.println("!!!!");
-			int result = pstmt.executeUpdate();
-			System.out.println(result + " row inserted");
-			pstmt.close();
-
-			conn.commit();
-			conn.setAutoCommit(true);
-			stmt.close();
-			//conn.close();
-		} catch(Exception e) {
-			System.err.println("sql error = " +
-					e.getMessage());
-		}
-
-	}
-	public void insertEMP(int eid, String ename, String emp_type, String epass) throws Exception {
-		// TODO Auto-generated method stub
-		try {
-			conn.setAutoCommit(false);
-			Statement stmt = conn.createStatement();
-
-
-			String sql = "insert into emp values(?, ?, ?, ?, ?, ?, ?, ?)";
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			//System.out.println("!!!!");
-			pstmt.setInt(1, eid);
-			pstmt.setString(2, ename);
-			pstmt.setString(3, emp_type);
-			pstmt.setString(4, epass);
-			
-
-			//System.out.println("!!!!");
-			int result = pstmt.executeUpdate();
-			System.out.println(result + " row inserted");
-			pstmt.close();
-
-			conn.commit();
-			conn.setAutoCommit(true);
-			stmt.close();
-			//conn.close();
-		} catch(Exception e) {
-			System.err.println("sql error = " +
-					e.getMessage());
-		}
-
-	}
-	public void insertResult(int stid, String suid, String semester, String grade, int retry) throws Exception {
-		// TODO Auto-generated method stub
-		try {
-			conn.setAutoCommit(false);
-			Statement stmt = conn.createStatement();
-
-
-			String sql = "insert into emp values(?, ?, ?, ?, ?)";
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			//System.out.println("!!!!");
-			pstmt.setInt(1, stid);
-			pstmt.setString(2, suid);
-			pstmt.setString(3, semester);
-			pstmt.setString(4, grade);
-			pstmt.setInt(5, retry);
-			
-
-			//System.out.println("!!!!");
-			int result = pstmt.executeUpdate();
-			System.out.println(result + " row inserted");
-			pstmt.close();
-
-			conn.commit();
-			conn.setAutoCommit(true);
-			stmt.close();
-			//conn.close();
-		} catch(Exception e) {
-			System.err.println("sql error = " +
-					e.getMessage());
-		}
-
-	}
-	public void updateEMPDid(int did, String ename) throws Exception {
-		try {
-			conn.setAutoCommit(false);
-			Statement stmt = conn.createStatement();
-
-			String sql = "update emp set did = ? where ename = ?";
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, did);
-			pstmt.setString(2, ename);
-
-			int result = pstmt.executeUpdate();
-			System.out.println(result + " rows updated");
-			pstmt.close();
-
-			conn.commit();
-			conn.setAutoCommit(true);
-			stmt.close();
-			//conn.close();
-		} catch(Exception e) {
-			System.err.println("sql error = " + e.getMessage());
-			throw e;
-		}
-	}
-	public void updateEMPSalary(int salary, String ename) throws Exception {
-		try {
-			conn.setAutoCommit(false);
-			Statement stmt = conn.createStatement();
-
-			String sql = "update emp set salary = ? where ename = ?";
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, salary);
-			pstmt.setString(2, ename);
-
-			int result = pstmt.executeUpdate();
-			System.out.println(result + " rows updated");
-			pstmt.close();
-
-			conn.commit();
-			conn.setAutoCommit(true);
-			stmt.close();
-			//conn.close();
-		} catch(Exception e) {
-			System.err.println("sql error = " + e.getMessage());
-			throw e;
-		}
-
-	}
-	public void deleteEMP(String ename) throws Exception {
-		try {
-
-			conn.setAutoCommit(false);//ø¿≈‰ƒøπ‘
-			Statement stmt = conn.createStatement();
-
-			String sql = "delete emp where ename = ?";
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, ename);
-
-			int result = pstmt.executeUpdate();
-			System.out.println(result + " rows deleted");
-			pstmt.close();
-
-			conn.commit();
-			conn.setAutoCommit(true);
-			stmt.close();
-			//conn.close();
-		}catch(Exception e){
-			System.err.println("sql erro =  " + e.getMessage());
-			throw e;
-		}
-	}
+	}*/
+	
 }
