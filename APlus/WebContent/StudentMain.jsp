@@ -92,14 +92,14 @@
 			<h2 class="card-title text-center" style="color: #113366;">APLUS</h2>
 		</div>
 		<div class="card-body">
-				<select name="semester" style="margin-left:50px">
+				<select id="semester" style="margin-left:50px">
 			<option value="">학기</option>
 			<option value="1">1학기</option>
 			<option value="2">2학기</option>
 			<option value="계절">계절학기</option>
 		</select>
 
-		<select name="category" style="margin-left:50px">
+		<select id="category" style="margin-left:50px">
 			<option value="">구분</option>
 			<option value="공학전공">공학전공</option>
 			<option value="전공기반">전공기반</option>
@@ -107,7 +107,7 @@
 			<option value="교양">교양</option>
 		</select>
 
-		<select name="grade" style="margin-left:50px">
+		<select id="grade" style="margin-left:50px">
 			<option value="">학점</option>
 			<option value="공학전공">공학전공</option>
 			<option value="전공기반">전공기반</option>
@@ -115,7 +115,8 @@
 			<option value="교양">교양</option>
 		</select>
 
-		<button class="btn btn-primary" style="margin-left:100px">검색</button>
+		<button class="btn btn-primary" style="margin-left:100px"
+		onclick = "search()">검색</button>
 	</div>
 	
 	<div style="margin:0 auto">
@@ -159,6 +160,13 @@
 function chPW() {
 	var id = <%=request.getParameter("stid")%>;
 	window.location.href = "changePassword.jsp?mode=0&id=" + id;
+}
+
+function search() {
+	var semester = document.getElementById("semester").value;
+	var category = document.getElementById("category").value;
+	var grade = document.getElementById("grade").value;
+
 	
 }
 </script>
