@@ -5,9 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="utf-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<title>Insert title here</title>
+<title>í•™ìƒ íŽ˜ì´ì§€</title>
 <style>
 	html {
 		height: 100%;
@@ -80,49 +80,53 @@
 	}
 </style>
 </head>
-<body>
-	<div align="right" style="width:100%">
-		<button class="btn btn-primary" style="position:relative; right: 0"  onclick="chPW()">ºñ¹Ð¹øÈ£ º¯°æ</button>
+<body cellpadding="0" cellspacing="0" marginleft="0" margintop="0"
+	width="100%" height="100%" align="center">
+	<div align="right" style="width: 100%">
+		<button class="btn btn-primary" style="position: relative; right: 0"
+			onclick="chPW()">ë¹„ë°€ë²ˆí˜¸ ë³€ê²½</button>
+	</div>
+	<div class="card align-middle"
+		style="width: 700px; border-radius: 20px;">
+		<div class="card-title" style="margin-top: 30px;">
+			<h2 class="card-title text-center" style="color: #113366;">APLUS</h2>
+		</div>
+		<div class="card-body">
+				<select name="semester" style="margin-left:50px">
+			<option value="">í•™ê¸°</option>
+			<option value="1">1í•™ê¸°</option>
+			<option value="2">2í•™ê¸°</option>
+			<option value="ê³„ì ˆ">ê³„ì ˆí•™ê¸°</option>
+		</select>
+
+		<select name="category" style="margin-left:50px">
+			<option value="">êµ¬ë¶„</option>
+			<option value="ê³µí•™ì „ê³µ">ê³µí•™ì „ê³µ</option>
+			<option value="ì „ê³µê¸°ë°˜">ì „ê³µê¸°ë°˜</option>
+			<option value="ê¸°ë³¸ì†Œì–‘">ê¸°ë³¸ì†Œì–‘</option>
+			<option value="êµì–‘">êµì–‘</option>
+		</select>
+
+		<select name="grade" style="margin-left:50px">
+			<option value="">í•™ì </option>
+			<option value="ê³µí•™ì „ê³µ">ê³µí•™ì „ê³µ</option>
+			<option value="ì „ê³µê¸°ë°˜">ì „ê³µê¸°ë°˜</option>
+			<option value="ê¸°ë³¸ì†Œì–‘">ê¸°ë³¸ì†Œì–‘</option>
+			<option value="êµì–‘">êµì–‘</option>
+		</select>
+
+		<button class="btn btn-primary" style="margin-left:100px">ê²€ìƒ‰</button>
 	</div>
 	
-	<div style="width:100%">
-	
-	<select name="semester" style="margin-left:30px, width:200px">
-			<option value="">ÇÐ±â</option>
-			<option value="1">1ÇÐ±â</option>
-			<option value="2">2ÇÐ±â</option>
-			<option value="°èÀý">°èÀýÇÐ±â</option>
-		</select>
-
-		<select name="category" style="margin-left:30px">
-			<option value="">±¸ºÐ</option>
-			<option value="°øÇÐÀü°ø">°øÇÐÀü°ø</option>
-			<option value="Àü°ø±â¹Ý">Àü°ø±â¹Ý</option>
-			<option value="±âº»¼Ò¾ç">±âº»¼Ò¾ç</option>
-			<option value="±³¾ç">±³¾ç</option>
-		</select>
-
-		<select name="grade" style="margin-left:30px">
-			<option value="">ÇÐÁ¡</option>
-			<option value="°øÇÐÀü°ø">°øÇÐÀü°ø</option>
-			<option value="Àü°ø±â¹Ý">Àü°ø±â¹Ý</option>
-			<option value="±âº»¼Ò¾ç">±âº»¼Ò¾ç</option>
-			<option value="±³¾ç">±³¾ç</option>
-		</select>
-
-		<button class="btn btn-primary" style="margin-left:30px">°Ë»ö</button>
-		
-		</div>
-	
 	<div style="margin:0 auto">
-		<table class="table" style="width:50%">
+		<table class="table" style="width:600px">
 			<thead>
 				<tr>
-					<th scope="cols">ÇÐ¹ø</th>
-					<th scope="cols">°­ÀÇ¹øÈ£</th>
-					<th scope="cols">ÇÐ±â</th>
-					<th scope="cols">¼ºÀû</th>
-					<th scope="cols">Àç¼ö°­¡©</th>
+					<th scope="cols">í•™ë²ˆ</th>
+					<th scope="cols">ê°•ì˜ë²ˆí˜¸</th>
+					<th scope="cols">í•™ê¸°</th>
+					<th scope="cols">ì„±ì </th>
+					<th scope="cols">ìž¬ìˆ˜ê°•Â­</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -148,6 +152,7 @@
 			%>
 			</tbody>
 		</table>
+	</div>
 	</div>
 	</div>
 	<script>
