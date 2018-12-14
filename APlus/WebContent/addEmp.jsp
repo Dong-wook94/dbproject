@@ -5,7 +5,7 @@
 <%@ page import="jdbc.*" %>
 <html lang="ko">
 <head>
-<meta charset="EUC-KR">
+<meta charset="utf-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>APLUS</title>
 <style>
@@ -49,17 +49,17 @@
 			<h2 class="card-title text-center" style="color:#113366;">APLUS</h2>
 		</div>
 		<div class="card-body">
-              <h5 class="form-signin-heading">±³Á÷¿ø Ãß°¡</h5>
-              <input type="text" id="old_pw" class="form-control" name="username" placeholder="±³Á÷¿ø ID" required autofocus><BR>
-              <input type="text" id="new_pw" class="form-control" name="username" placeholder="ÀÌ¸§" required autofocus><BR>
+              <h5 class="form-signin-heading">êµì§ì› ì¶”ê°€</h5>
+              <input type="text" id="old_pw" class="form-control" name="username" placeholder="êµì§ì› ID" required autofocus><BR>
+              <input type="text" id="new_pw" class="form-control" name="username" placeholder="ì´ë¦„" required autofocus><BR>
               
-              <select name="employee">
-              <option selected="selected" value="0">±³¼ö</option>
-              <option value="1">±³Á÷¿ø</option>
+              <select id="employee">
+              <option selected="selected" value="0">êµìˆ˜</option>
+              <option value="1">êµì§ì›</option>
               </select>
              
 
-              <button class="btn btn-lg btn-primary btn-block" onclick="chPw()" >Ãß°¡</button>
+              <button class="btn btn-lg btn-primary btn-block" onclick="addEmployee()" >ì¶”ê°€</button>
                    
 	
       
@@ -78,7 +78,7 @@
 	try{
 		
 		if(Integer.parseInt(request.getParameter("success")) == 0)
-			fail = "¾ÆÀÌµğ°¡ ¾ø°Å³ª ºñ¹Ğ¹øÈ£°¡ Æ²¸³´Ï´Ù.";
+			fail = "ì•„ì´ë””ê°€ ì—†ê±°ë‚˜ ë¹„ë°€ë²ˆí˜¸ê°€ í‹€ë¦½ë‹ˆë‹¤.";
 	}catch(Exception e){}
 %>
 <script>
@@ -90,10 +90,14 @@ function chPw() {
 	if(new_pw == new_pw2)
 		window.location.href = "changePasswordAction.jsp?mode="+<%=request.getParameter("mode")%>+"&id=" + <%=request.getParameter("id")%> + "&new_pw=" + new_pw+"&old_pw="+old_pw;
 	else{
-		alert("»õ ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+		alert("ìƒˆ ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 	}
 		
 	
+}
+
+function addEmployee(){
+	var employee = document.getElementById("employee").value;
 }
 </script>
 <h5 style="text-align:center; color:white"><%=fail%></h5>
