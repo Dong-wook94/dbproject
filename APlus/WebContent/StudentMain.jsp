@@ -136,12 +136,37 @@
 			</thead>
 			<tbody>
 			<%
+				String filterSemester = request.getParameter("semester");
+				String filterCategory = request.getParameter("category");
+				String filterGrade = request.getParameter("grade");
+			
 				Database db = new Database();
 				db.connectDriver();
 				
 				String stid = request.getParameter("stid");
 				
-				ArrayList<Result> result = db.SelectResultQuery("select * from results where stid = " + stid);
+				String query = "select * from results where stid = " + stid;
+				
+				if (filterSemester != null) {
+					query = query + " and semester = " + filterSemester;
+				}
+				
+				ArrayList<Result> result = db.SelectResultQuery(query);
+				
+				ArrayList<String> fsuid = new ArrayList<String>();
+				for (Result r : result) {
+					fsuid.add(r.getSuid());
+				}
+				
+				HashMap<String, String> itc = db.SelectCategoryFromResults(fsuid);
+				
+				if (filterCategory != null) {
+					ArrayList<Result> nResult = new ArrayList<Result>();
+					for (Result r : result) {
+						if (itc.get(r.getSuid()).equals(filterCategory)) nResult.add(r);
+					}
+					result = nResult;
+				}
 				
 				for (Result r : result) {
 					%>
