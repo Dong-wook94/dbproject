@@ -28,7 +28,7 @@ public class Database {
 	public void connectDriver() throws Exception{
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			System.out.println("ë“œë¼ì´ë²„ ê²€ìƒ‰ ì„±ê³µ!");
+			System.out.println("µå¶óÀÌ¹ö °Ë»ö ¼º°ø!");
 		}catch(ClassNotFoundException e) {
 			System.err.println("error = " + e.getMessage());
 			System.exit(1);
@@ -53,7 +53,7 @@ public class Database {
 	}
 	
 	public ArrayList<Student> SelectStudentQuery(String query) throws Exception{
-		conn.setAutoCommit(false);//ì˜¤í† ì»¤ë°‹
+		conn.setAutoCommit(false);//¿ÀÅäÄ¿¹Ô
 		Statement stmt = conn.createStatement();
 
 		ResultSet rs = stmt.executeQuery(query);
@@ -69,7 +69,7 @@ public class Database {
 		return aList;
 	}
 	public ArrayList<Employee> SelectEmployeeQuery(String query) throws Exception{
-		conn.setAutoCommit(false);//ì˜¤í† ì»¤ë°‹
+		conn.setAutoCommit(false);//¿ÀÅäÄ¿¹Ô
 		Statement stmt = conn.createStatement();
 
 		ResultSet rs = stmt.executeQuery(query);
@@ -85,7 +85,7 @@ public class Database {
 		return aList;
 	}
 	public ArrayList<Result> SelectResultQuery(String query) throws Exception{
-		conn.setAutoCommit(false);//ì˜¤í† ì»¤ë°‹
+		conn.setAutoCommit(false);//¿ÀÅäÄ¿¹Ô
 		Statement stmt = conn.createStatement();
 
 		ResultSet rs = stmt.executeQuery(query);
@@ -101,7 +101,7 @@ public class Database {
 		return aList;
 	}
 	public ArrayList<Subject> SelectSubjectQuery(String query) throws Exception{
-		conn.setAutoCommit(false);//ì˜¤í† ì»¤ë°‹
+		conn.setAutoCommit(false);//¿ÀÅäÄ¿¹Ô
 		Statement stmt = conn.createStatement();
 
 		ResultSet rs = stmt.executeQuery(query);
@@ -123,7 +123,7 @@ public class Database {
 		HashMap<String, String> map = new HashMap<String, String>();
 		
 		for (String s : suid) {
-			ResultSet rs = stmt.executeQuery("select sufield from subject where suid = " + s);
+			ResultSet rs = stmt.executeQuery("select sufield from subject where suid = '" + s + "'");
 			while (rs.next()) {
 				map.put(s, rs.getString(1));
 			}
@@ -134,29 +134,45 @@ public class Database {
 		stmt.close();
 		return map;
 	}
+	public int GetTotalCredit(ArrayList<String> suid) throws Exception {
+		conn.setAutoCommit(false);
+		Statement stmt = conn.createStatement();
+
+		int totalCredit = 0;
+		
+		for (String s : suid) {
+			ResultSet rs = stmt.executeQuery("select credit from subject where suid = '" + s + "'");
+			while (rs.next()) {
+				totalCredit += rs.getInt(1);
+			}
+			rs.close();
+		}
+		conn.commit();
+		conn.setAutoCommit(true);
+		stmt.close();
+		return totalCredit;
+	}
 	public void DMLCustomQuery(String sql) throws Exception{
-		conn.setAutoCommit(false);//ì˜¤í† ì»¤ë°‹
+		conn.setAutoCommit(false);//¿ÀÅäÄ¿¹Ô
 		Statement stmt = conn.createStatement();
 		
 		int result = stmt.executeUpdate(sql);
-		System.out.println(result+"í–‰ ì—…ë°ì´íŠ¸");
+		System.out.println(result+"Çà ¾÷µ¥ÀÌÆ®");
 		conn.commit();
 		conn.setAutoCommit(true);
 		stmt.close();
 	}
 
 
-	/*public void callStoredProc() throws Exception{
+	public void callStoredProc(String procName) throws Exception{
 		try {
 			conn.setAutoCommit(false);
 
-			String sql = "{call proc_uupdateMaxSalary}";
+			String sql = "{call " + procName + "}";
 			CallableStatement cstmt = null;
 			cstmt = conn.prepareCall(sql);
-			//cstmt.setInt(1,20);
-			//cstmt.registerOutParameter(2, java.sql.Types.INTEGER);
 			cstmt.execute();
-			System.out.println("Stored Procedure í˜¸ì¶œ");
+			System.out.println("Stored Procedure È£Ãâ");
 			conn.commit();
 			conn.setAutoCommit(true);
 			cstmt.close();
@@ -164,6 +180,6 @@ public class Database {
 			System.err.println("Sql error = " + e.getMessage());
 			throw e;
 		}
-	}*/
+	}
 	
 }
