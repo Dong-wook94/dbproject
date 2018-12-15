@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,6 +71,8 @@ style="width: 20rem; border-radius: 20px;">
 	
 	<button class="btn btn-lg btn-primary btn-block"
 	onclick="insertStudent()">학생 추가</button>
+
+	<form name="frm" method="post" action=""></form>
 	
 
 
@@ -80,10 +82,31 @@ style="width: 20rem; border-radius: 20px;">
 
 </body>
 <script>
+<%
+		Database db = new Database();
+		db.connectDriver();
+
+
+		String id = request.getParameter("id");
+		String name = request.getParameter("name");
+		String major = request.getParameter("major");
+
+		if(!(id.equals("")||id==null) && !(name.equals("")||name==null) && !(major.equals("")||major==null))
+			db.DMLCustomQuery("insert into student values ("+id+","+name+","+major+")");
+		%>
+
+
+
 	function addStudent(){
-	var id = document.getElementById("id");
-	var name = document.getElementById("name");
-	var major = document.getElementById("major");
-}
-	</script>
+		var id = document.getElementById("id");
+		var name = document.getElementById("name");
+		var major = document.getElementById("major");
+
+		frm.target="por"
+		frm.action="addStudent.html?id="+id+"&name="+name+"&major="+major;
+		frm.submit();
+
+		
+	}
+</script>
 </html>
