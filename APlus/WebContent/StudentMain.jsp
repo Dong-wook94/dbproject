@@ -167,7 +167,7 @@ function search() {
 	var category = document.getElementById("category").value;
 	var grade = document.getElementById("grade").value;
 
-	
+
 }
 </script>
 </body>

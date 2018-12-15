@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+pageEncoding="utf-8"
+import="jdbc.*"
+import="java.util.*" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,7 +50,7 @@ crossorigin="anonymous">
 width="100%" height="100%" align="center">
 <div align="right" style="width: 100%">
 	<button class="btn btn-primary" style="position: relative; right: 0"
-	onclick="chPW()">비밀번호 변경</button>
+	onclick="chPW()">비밀번호변경</button>
 </div>
 <div class="card align-middle"
 style="width: 20rem; border-radius: 20px;">
@@ -56,7 +59,9 @@ style="width: 20rem; border-radius: 20px;">
 </div>
 <div class="card-body">
 	<h5 class="form-signin-heading">학생 추가</h5><BR>
-	<label for="inputEmail" class="sr-only">학번 또는 교직원 번호</label> <input
+	<label for="inputEmail" class="sr-only">학번 또는 교직원 번호</label>
+
+	<input
 	type="text" id="id" class="form-control" name="username"
 	placeholder="학번" required autofocus><BR>
 
@@ -67,6 +72,10 @@ style="width: 20rem; border-radius: 20px;">
 	<input
 	type="text" id="major" class="form-control" name="username"
 	placeholder="전공" required autofocus><BR>
+
+	<input
+	type="text" id="year" class="form-control" name="username"
+	placeholder="학년" required autofocus><BR>
 
 	
 	<button class="btn btn-lg btn-primary btn-block"
@@ -82,28 +91,31 @@ style="width: 20rem; border-radius: 20px;">
 
 </body>
 <script>
-<%
-		Database db = new Database();
-		db.connectDriver();
+	<%
+	Database db = new Database();
+	db.connectDriver();
 
 
-		String id = request.getParameter("id");
-		String name = request.getParameter("name");
-		String major = request.getParameter("major");
+	String id = request.getParameter("id");
+	String name = request.getParameter("name");
+	String major = request.getParameter("major");
+	String year = request.getParameter("year");
 
-		if(!(id.equals("")||id==null) && !(name.equals("")||name==null) && !(major.equals("")||major==null))
-			db.DMLCustomQuery("insert into student values ("+id+","+name+","+major+")");
-		%>
+	if(id!=null && name!=null && major!=null)
+		db.DMLCustomQuery("insert into student values (" +id+ ",'" + name+ "', '1234', '"+major+"', '"+year+"',0)");
+
+	%>
 
 
 
-	function addStudent(){
-		var id = document.getElementById("id");
-		var name = document.getElementById("name");
-		var major = document.getElementById("major");
+	function insertStudent(){
+		var id = document.getElementById("id").value;
+		var name = document.getElementById("name").value;
+		var major = document.getElementById("major").value;
+		var year = document.getElementById("year").value;
 
 		frm.target="por"
-		frm.action="addStudent.html?id="+id+"&name="+name+"&major="+major;
+		frm.action="addStudent.jsp?id="+id+"&name="+name+"&major="+major+"&year="+year;
 		frm.submit();
 
 		

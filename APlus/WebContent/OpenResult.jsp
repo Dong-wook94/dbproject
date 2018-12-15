@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"
     import="jdbc.*"
     import="java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="utf-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <title>Insert title here</title>
 </head>
@@ -14,11 +14,11 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>ÇĞ¹ø</th>
-					<th>°­ÀÇ¹øÈ£</th>
-					<th>ÇĞ±â</th>
-					<th>¼ºÀû</th>
-					<th>Àç¼ö°­</th>
+					<th>í•™ë²ˆ</th>
+					<th>ê°•ì˜ë²ˆí˜¸</th>
+					<th>í•™ê¸°</th>
+					<th>ì„±ì </th>
+					<th>ì¬ìˆ˜ê°•</th>
 				</tr>
 			</thead>
 			<tbody>

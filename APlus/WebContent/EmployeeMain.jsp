@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR" import="jdbc.*" import="java.util.*"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8" import="jdbc.*" import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,7 +47,7 @@ body {
 	width="100%" height="100%" align="center">
 	<div align="right" style="width: 100%">
 		<button class="btn btn-primary" style="position: relative; right: 0"
-			onclick="chPW()">ºñ¹Ð¹øÈ£ º¯°æ</button>
+			onclick="chPW()">ë¹„ë°€ë²ˆí˜¸ ë³€ê²½</button>
 	</div>
 	<div class="card align-middle"
 		style="width: 20rem; border-radius: 20px;">
@@ -55,19 +55,19 @@ body {
 			<h2 class="card-title text-center" style="color: #113366;">APLUS</h2>
 		</div>
 		<div class="card-body">
-			<h5 class="form-signin-heading">±³Á÷¿ø ÆäÀÌÁö</h5>
-			<label for="inputEmail" class="sr-only">ÇÐ¹ø ¶Ç´Â ±³Á÷¿ø ¹øÈ£</label> <input
+			<h5 class="form-signin-heading">êµì§ì› íŽ˜ì´ì§€</h5>
+			<label for="inputEmail" class="sr-only">í•™ë²ˆ ë˜ëŠ” êµì§ì› ë²ˆí˜¸</label> <input
 				type="text" id="id" class="form-control" name="username"
-				placeholder="ÇÐ¹ø ÀÔ·Â" required autofocus><BR>
+				placeholder="í•™ë²ˆ ìž…ë ¥" required autofocus><BR>
 
-			<button class="btn btn-lg btn-primary btn-block" onclick="checkStd()">¼ºÀû
-				¿­¶÷</button>
+			<button class="btn btn-lg btn-primary btn-block" onclick="checkStd()">ì„±ì 
+				ì—´ëžŒ</button>
 			<button class="btn btn-lg btn-primary btn-block"
-				onclick="insertStudent()">ÇÐ»ý Ãß°¡</button>
+				onclick="insertStudent()">í•™ìƒ ì¶”ê°€</button>
 			<button class="btn btn-lg btn-primary btn-block"
-				onclick="insertEmp()">±³Á÷¿ø Ãß°¡</button>
-			<button class="btn btn-lg btn-primary btn-block" onclick="updateResult()">¼ºÀûÀÔ·Â
-				¹× ¼öÁ¤</button>
+				onclick="insertEmp()">êµì§ì› ì¶”ê°€</button>
+			<button class="btn btn-lg btn-primary btn-block" onclick="updateResult()">ì„±ì ìž…ë ¥
+				ë° ìˆ˜ì •</button>
 
 
 

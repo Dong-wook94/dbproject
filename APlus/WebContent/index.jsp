@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
     
 <%@ page import="jdbc.*" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="EUC-KR">
+<meta charset="utf-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>APLUS</title>
 <style>
@@ -49,14 +49,14 @@
 			<h2 class="card-title text-center" style="color:#113366;">APLUS</h2>
 		</div>
 		<div class="card-body">
-              <h5 class="form-signin-heading">�α���</h5>
-              <label for="inputEmail" class="sr-only">�й� �Ǵ� ������ ��ȣ</label>
-              <input type="text" id="id" class="form-control" name="username" placeholder="�й� �Ǵ� ������ ��ȣ" required autofocus><BR>
-              <label for="inputPassword" class="sr-only">��й�ȣ</label>
-              <input type="password" id="pw" class="form-control" name="password" placeholder="��й�ȣ" required><br>
+              <h5 class="form-signin-heading">로그인</h5>
+              <label for="inputEmail" class="sr-only">학번 또는 교직원 번호</label>
+              <input type="text" id="id" class="form-control" name="username" placeholder="학번 또는 교직원 번호" required autofocus><BR>
+              <label for="inputPassword" class="sr-only">비밀번호</label>
+              <input type="password" id="pw" class="form-control" name="password" placeholder="비밀번호" required><br>
 
-              <button class="btn btn-lg btn-primary btn-block" onclick="login(0)" >�л� �α���</button>
-                   <button  class="btn btn-lg btn-primary btn-block" onclick="login(1)">������ �α���</button>
+              <button class="btn btn-lg btn-primary btn-block" onclick="login(0)" >학생 로그인</button>
+                   <button  class="btn btn-lg btn-primary btn-block" onclick="login(1)">교직원 로그인</button>
                    
 	
       
@@ -75,7 +75,7 @@
 	try{
 
 		if(Integer.parseInt(request.getParameter("success")) == 0)
-			fail = "���̵� ���ų� ��й�ȣ�� Ʋ���ϴ�.";
+			fail = "아이디가 없거나 비밀번호가 틀립니다.";
 	}catch(Exception e){}
 %>
 <script>
