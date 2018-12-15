@@ -28,7 +28,7 @@ public class Database {
 	public void connectDriver() throws Exception{
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			System.out.println("����̹� �˻� ����!");
+			System.out.println("드라이버 검색 성공!");
 		}catch(ClassNotFoundException e) {
 			System.err.println("error = " + e.getMessage());
 			System.exit(1);
@@ -53,7 +53,7 @@ public class Database {
 	}
 	
 	public ArrayList<Student> SelectStudentQuery(String query) throws Exception{
-		conn.setAutoCommit(false);//����Ŀ��
+		conn.setAutoCommit(false);//오토커밋
 		Statement stmt = conn.createStatement();
 
 		ResultSet rs = stmt.executeQuery(query);
@@ -69,7 +69,7 @@ public class Database {
 		return aList;
 	}
 	public ArrayList<Employee> SelectEmployeeQuery(String query) throws Exception{
-		conn.setAutoCommit(false);//����Ŀ��
+		conn.setAutoCommit(false);//오토커밋
 		Statement stmt = conn.createStatement();
 
 		ResultSet rs = stmt.executeQuery(query);
@@ -85,7 +85,7 @@ public class Database {
 		return aList;
 	}
 	public ArrayList<Result> SelectResultQuery(String query) throws Exception{
-		conn.setAutoCommit(false);//����Ŀ��
+		conn.setAutoCommit(false);//오토커밋
 		Statement stmt = conn.createStatement();
 
 		ResultSet rs = stmt.executeQuery(query);
@@ -101,7 +101,7 @@ public class Database {
 		return aList;
 	}
 	public ArrayList<Subject> SelectSubjectQuery(String query) throws Exception{
-		conn.setAutoCommit(false);//����Ŀ��
+		conn.setAutoCommit(false);//오토커밋
 		Statement stmt = conn.createStatement();
 
 		ResultSet rs = stmt.executeQuery(query);
@@ -135,11 +135,11 @@ public class Database {
 		return map;
 	}
 	public void DMLCustomQuery(String sql) throws Exception{
-		conn.setAutoCommit(false);//����Ŀ��
+		conn.setAutoCommit(false);//오토커밋
 		Statement stmt = conn.createStatement();
 		
 		int result = stmt.executeUpdate(sql);
-		System.out.println(result+"�� ������Ʈ");
+		System.out.println(result+"행 업데이트");
 		conn.commit();
 		conn.setAutoCommit(true);
 		stmt.close();
@@ -156,7 +156,7 @@ public class Database {
 			//cstmt.setInt(1,20);
 			//cstmt.registerOutParameter(2, java.sql.Types.INTEGER);
 			cstmt.execute();
-			System.out.println("Stored Procedure ȣ��");
+			System.out.println("Stored Procedure 호출");
 			conn.commit();
 			conn.setAutoCommit(true);
 			cstmt.close();
