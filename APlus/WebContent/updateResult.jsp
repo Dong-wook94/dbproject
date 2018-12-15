@@ -52,16 +52,10 @@
               <h5 class="form-signin-heading">성적입력 및 수정</h5>
               
               <input type="text" id="suid" class="form-control" name="username" placeholder="과목 코드 입력" required autofocus><BR>
-              
-              <select id="semester">
-              <option selected="selected" value="0">1학기</option>
-              <option value="1">2학기</option>
-              <option value="2">여름게절</option>
-              <option value="3">겨울계절</option>
-              </select>
+              <input type="text" id="semester" class="form-control" name="username" placeholder="년도-학기  ex)2018-1 or 2018-s" required autofocus><BR>
               <input type="text" id="stid" class="form-control" name="username" placeholder="학번 입력" required autofocus><BR>
               
-              <select id="result">
+              <select id=grade>
               <option selected="selected" value="0">A+</option>
               <option value="1">A0</option>
               <option value="2">A-</option>
@@ -97,22 +91,14 @@
 	}catch(Exception e){}
 %>
 <script>
-function chPw() {
-	var old_pw = document.getElementById("old_pw").value;
-	var new_pw = document.getElementById("new_pw").value;
-	var new_pw2 = document.getElementById("new_pw2").value;
-	
-	if(new_pw == new_pw2)
-		window.location.href = "changePasswordAction.jsp?mode="+<%=request.getParameter("mode")%>+"&id=" + <%=request.getParameter("id")%> + "&new_pw=" + new_pw+"&old_pw="+old_pw;
-	else{
-		alert("�� 鍮�諛�踰��멸� �쇱���吏� ���듬����.");
-	}
-		
-	
-}
 
 function updateRec(){
-	var employee = document.getElementById("employee").value;
+	var suid = document.getElementById("suid").value;
+	var stid = document.getElementById("stid").value;
+	var semester = document.getElementById("semester").value;
+	var result = document.getElementById("grade").value;
+	
+	window.location.href = "updateResult.jsp?id=" + <%=request.getParameter("id")%>+"&suid="+suid+"&stid="+stid+"&semester="+semester+"&grade="+grade;
 }
 </script>
 <h5 style="text-align:center; color:white"><%=fail%></h5>
