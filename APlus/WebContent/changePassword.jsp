@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
     
 <%@ page import="jdbc.*" %>
 <html lang="ko">
 <head>
-<meta charset="EUC-KR">
+<meta charset="utf-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>APLUS</title>
 <style>
@@ -49,12 +49,12 @@
 			<h2 class="card-title text-center" style="color:#113366;">APLUS</h2>
 		</div>
 		<div class="card-body">
-              <h5 class="form-signin-heading">ºñ¹Ğ¹øÈ£ º¯°æ</h5>
-              <input type="text" id="old_pw" class="form-control" name="username" placeholder="±âÁ¸ºñ¹Ğ¹øÈ£" required autofocus><BR>
-              <input type="text" id="new_pw" class="form-control" name="username" placeholder="»õ ºñ¹Ğ¹øÈ£" required autofocus><BR>
-              <input type="password" id="new_pw2" class="form-control" name="password" placeholder="»õ ºñ¹Ğ¹øÈ£ È®ÀÎ" required><br>
+              <h5 class="form-signin-heading">ë¹„ë°€ë²ˆí˜¸ ë³€ê²½</h5>
+              <input type="text" id="old_pw" class="form-control" name="username" placeholder="ê¸°ì¡´ë¹„ë°€ë²ˆí˜¸" required autofocus><BR>
+              <input type="text" id="new_pw" class="form-control" name="username" placeholder="ìƒˆ ë¹„ë°€ë²ˆí˜¸" required autofocus><BR>
+              <input type="password" id="new_pw2" class="form-control" name="password" placeholder="ìƒˆ ë¹„ë°€ë²ˆí˜¸ í™•ì¸" required><br>
 
-              <button class="btn btn-lg btn-primary btn-block" onclick="chPw()" >º¯°æ</button>
+              <button class="btn btn-lg btn-primary btn-block" onclick="chPw()" >ë³€ê²½</button>
                    
 	
       
@@ -73,7 +73,7 @@
 	try{
 		
 		if(Integer.parseInt(request.getParameter("success")) == 0)
-			fail = "¾ÆÀÌµğ°¡ ¾ø°Å³ª ºñ¹Ğ¹øÈ£°¡ Æ²¸³´Ï´Ù.";
+			fail = "ì•„ì´ë””ê°€ ì—†ê±°ë‚˜ ë¹„ë°€ë²ˆí˜¸ê°€ í‹€ë¦½ë‹ˆë‹¤.";
 	}catch(Exception e){}
 %>
 <script>
@@ -85,7 +85,7 @@ function chPw() {
 	if(new_pw == new_pw2)
 		window.location.href = "changePasswordAction.jsp?mode="+<%=request.getParameter("mode")%>+"&id=" + <%=request.getParameter("id")%> + "&new_pw=" + new_pw+"&old_pw="+old_pw;
 	else{
-		alert("»õ ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+		alert("ìƒˆ ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 	}
 		
 	

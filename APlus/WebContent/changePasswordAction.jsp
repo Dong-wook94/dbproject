@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"
     import="jdbc.*"
 	import = "java.util.*"%>
 
@@ -43,10 +43,10 @@
 	<script>
 	if(<%= success %> == 0)
 	{
-		alert("��й�ȣ�� Ʋ�Ƚ��ϴ�.");
+		alert("비밀번호가 틀렸습니다.");
 	}
 	else{
-		alert("��й�ȣ ������ �Ϸ�Ǿ����ϴ�.");
+		alert("비밀번호 변경이 완료되었습니다.");
 	}
 	
 	switch(<%=mode%>) {
