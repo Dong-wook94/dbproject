@@ -6,7 +6,7 @@
 	db.connectDriver();
 	int success = 0;
 
-	int id = Integer.parseInt(request.getParameter("id"));
+	int id = Integer.parseInt(request.getParameter("eid"));
 	String suid = request.getParameter("suid");
 	String stid = request.getParameter("stid");
 	String semester = request.getParameter("semester");
@@ -60,11 +60,11 @@
 <body>
 	<script>
 		if (<%=success%>== 1) {
-			window.location.href = "EmployeeMain.jsp?eid="+<%=id%>;
+			window.location.href = "EmployeeMain.jsp?eid="+ <%=request.getParameter("eid")%>;
 		} else if (<%=success%>== 0) {
-			window.location.href = "StudentMain.jsp?stid=" +<%=id%>;
+			window.location.href = "updateResult.jsp?eid="+ <%=request.getParameter("eid")%>+"&success=0";
 		} else if(<%=success%>== -1) {
-			window.location.href = "EmployeeMain.jsp?eid=" +<%=id%>;
+			window.location.href = "updateResult.jsp?eid="+ <%=request.getParameter("eid")%>+"&success=-1";
 		}
 		
 	</script>

@@ -52,7 +52,7 @@
               <h5 class="form-signin-heading">성적입력 및 수정</h5>
               
               <input type="text" id="suid" class="form-control" name="username" placeholder="과목 코드 입력" required autofocus><BR>
-              <input type="text" id="semester" class="form-control" name="username" placeholder="년도-학기  ex)2018-1 or 2018-s" required autofocus><BR>
+              <input type="text" id="semester" class="form-control" name="username" placeholder="년도-학기  ex)20181 or 2018S" required autofocus><BR>
               <input type="text" id="stid" class="form-control" name="username" placeholder="학번 입력" required autofocus><BR>
               
               <select id=grade>
@@ -66,7 +66,7 @@
               <option value="7">C0</option>
               <option value="8">C-</option>
               <option value="9">F</option>
-              </select>
+              </select><BR>
               
               <button class="btn btn-lg btn-primary btn-block" onclick="updateRec()" >입력</button>
                    
@@ -96,9 +96,9 @@ function updateRec(){
 	var suid = document.getElementById("suid").value;
 	var stid = document.getElementById("stid").value;
 	var semester = document.getElementById("semester").value;
-	var result = document.getElementById("grade").value;
-	
-	window.location.href = "updateResult.jsp?id=" + <%=request.getParameter("id")%>+"&suid="+suid+"&stid="+stid+"&semester="+semester+"&grade="+grade;
+	var select = document.getElementById("grade");
+    var grade = select.options[select.selectedIndex].value;
+	window.location.href = "updateResultAction.jsp?eid=" + <%=request.getParameter("eid")%>+"&suid="+suid+"&stid="+stid+"&semester="+semester+"&grade="+grade;
 }
 </script>
 <h5 style="text-align:center; color:white"><%=fail%></h5>
