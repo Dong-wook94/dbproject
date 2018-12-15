@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"
-    import="jdbc.*"
-    import="java.util.*" %>
+pageEncoding="utf-8"
+import="jdbc.*"
+import="java.util.*" %>
 
 <!DOCTYPE html>
 <html>
@@ -59,7 +59,9 @@ style="width: 20rem; border-radius: 20px;">
 </div>
 <div class="card-body">
 	<h5 class="form-signin-heading">학생 추가</h5><BR>
-	<label for="inputEmail" class="sr-only">학번 또는 교직원 번호</label> <input
+	<label for="inputEmail" class="sr-only">학번 또는 교직원 번호</label>
+
+	<input
 	type="text" id="id" class="form-control" name="username"
 	placeholder="학번" required autofocus><BR>
 
@@ -89,20 +91,20 @@ style="width: 20rem; border-radius: 20px;">
 
 </body>
 <script>
-<%
-		Database db = new Database();
-		db.connectDriver();
+	<%
+	Database db = new Database();
+	db.connectDriver();
 
 
-		String id = request.getParameter("id");
-		String name = request.getParameter("name");
-		String major = request.getParameter("major");
-		String year = request.getParameter("year");
+	String id = request.getParameter("id");
+	String name = request.getParameter("name");
+	String major = request.getParameter("major");
+	String year = request.getParameter("year");
 
-		if(id!=null && name!=null && major!=null)
-			db.DMLCustomQuery("insert into student values (" +id+ ",'" + name+ "', '1234', '"+major+"', '"+year+"',0)");
+	if(id!=null && name!=null && major!=null)
+		db.DMLCustomQuery("insert into student values (" +id+ ",'" + name+ "', '1234', '"+major+"', '"+year+"',0)");
 
-		%>
+	%>
 
 
 
