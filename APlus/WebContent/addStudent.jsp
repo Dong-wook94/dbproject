@@ -58,15 +58,15 @@ style="width: 20rem; border-radius: 20px;">
 	<h5 class="form-signin-heading">학생 추가</h5><BR>
 	<label for="inputEmail" class="sr-only">학번 또는 교직원 번호</label> <input
 	type="text" id="id" class="form-control" name="username"
-	placeholder="학번 입력" required autofocus><BR>
+	placeholder="학번" required autofocus><BR>
 
 	<input
 	type="text" id="name" class="form-control" name="username"
-	placeholder="이름 입력" required autofocus><BR>
+	placeholder="이름" required autofocus><BR>
 
 	<input
 	type="text" id="major" class="form-control" name="username"
-	placeholder="전공 입력" required autofocus><BR>
+	placeholder="전공" required autofocus><BR>
 
 	
 	<button class="btn btn-lg btn-primary btn-block"
