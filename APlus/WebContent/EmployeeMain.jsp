@@ -66,7 +66,7 @@ body {
 				onclick="insertStudent()">학생 추가</button>
 			<button class="btn btn-lg btn-primary btn-block"
 				onclick="insertEmp()">교직원 추가</button>
-			<button class="btn btn-lg btn-primary btn-block" onclick="login(1)">성적입력
+			<button class="btn btn-lg btn-primary btn-block" onclick="updateResult()">성적입력
 				및 수정</button>
 
 
@@ -90,6 +90,10 @@ body {
 		function chPW() {
 			var id =<%=request.getParameter("eid")%>;
 			window.location.href = "changePassword.jsp?mode=1&id=" + id;
+		}
+		function updateResult(){
+			var id =<%=request.getParameter("eid")%>;
+			window.location.href = "updateResult.jsp?eid="+id;
 		}
 	</script>
 </body>
