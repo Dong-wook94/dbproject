@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Database {
 
@@ -27,7 +28,7 @@ public class Database {
 	public void connectDriver() throws Exception{
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			System.out.println("µå¶óÀÌ¹ö °Ë»ö ¼º°ø!");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½!");
 		}catch(ClassNotFoundException e) {
 			System.err.println("error = " + e.getMessage());
 			System.exit(1);
@@ -52,7 +53,7 @@ public class Database {
 	}
 	
 	public ArrayList<Student> SelectStudentQuery(String query) throws Exception{
-		conn.setAutoCommit(false);//¿ÀÅäÄ¿¹Ô
+		conn.setAutoCommit(false);//ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½
 		Statement stmt = conn.createStatement();
 
 		ResultSet rs = stmt.executeQuery(query);
@@ -68,7 +69,7 @@ public class Database {
 		return aList;
 	}
 	public ArrayList<Employee> SelectEmployeeQuery(String query) throws Exception{
-		conn.setAutoCommit(false);//¿ÀÅäÄ¿¹Ô
+		conn.setAutoCommit(false);//ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½
 		Statement stmt = conn.createStatement();
 
 		ResultSet rs = stmt.executeQuery(query);
@@ -84,7 +85,7 @@ public class Database {
 		return aList;
 	}
 	public ArrayList<Result> SelectResultQuery(String query) throws Exception{
-		conn.setAutoCommit(false);//¿ÀÅäÄ¿¹Ô
+		conn.setAutoCommit(false);//ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½
 		Statement stmt = conn.createStatement();
 
 		ResultSet rs = stmt.executeQuery(query);
@@ -100,7 +101,7 @@ public class Database {
 		return aList;
 	}
 	public ArrayList<Subject> SelectSubjectQuery(String query) throws Exception{
-		conn.setAutoCommit(false);//¿ÀÅäÄ¿¹Ô
+		conn.setAutoCommit(false);//ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½
 		Statement stmt = conn.createStatement();
 
 		ResultSet rs = stmt.executeQuery(query);
@@ -115,12 +116,30 @@ public class Database {
 		stmt.close();
 		return aList;
 	}
+	public HashMap<String, String> SelectCategoryFromResults(ArrayList<String> suid) throws Exception {
+		conn.setAutoCommit(false);
+		Statement stmt = conn.createStatement();
+
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		for (String s : suid) {
+			ResultSet rs = stmt.executeQuery("select sufield from subject where suid = " + s);
+			while (rs.next()) {
+				map.put(s, rs.getString(1));
+			}
+			rs.close();
+		}
+		conn.commit();
+		conn.setAutoCommit(true);
+		stmt.close();
+		return map;
+	}
 	public void DMLCustomQuery(String sql) throws Exception{
-		conn.setAutoCommit(false);//¿ÀÅäÄ¿¹Ô
+		conn.setAutoCommit(false);//ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½
 		Statement stmt = conn.createStatement();
 		
 		int result = stmt.executeUpdate(sql);
-		System.out.println(result+"Çà ¾÷µ¥ÀÌÆ®");
+		System.out.println(result+"ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®");
 		conn.commit();
 		conn.setAutoCommit(true);
 		stmt.close();
@@ -137,7 +156,7 @@ public class Database {
 			//cstmt.setInt(1,20);
 			//cstmt.registerOutParameter(2, java.sql.Types.INTEGER);
 			cstmt.execute();
-			System.out.println("Stored Procedure È£Ãâ");
+			System.out.println("Stored Procedure È£ï¿½ï¿½");
 			conn.commit();
 			conn.setAutoCommit(true);
 			cstmt.close();
