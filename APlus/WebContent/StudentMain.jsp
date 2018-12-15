@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"
+    pageEncoding="UTF-8"
     import="jdbc.*"
     import="java.util.*" %>
 <!DOCTYPE html>
@@ -40,7 +40,6 @@
 		padding: 10px;
 		font-size: 16px;
 	}
-
 	table.type07 {
 		border-collapse: collapse;
 		text-align: left;
@@ -73,7 +72,6 @@
 		vertical-align: top;
 		border-bottom: 1px solid #ccc;
 	}
-
 	#wrapper{
 		max-width: 1020px;
 		margin : 0 auto;
@@ -92,28 +90,34 @@
 			<h2 class="card-title text-center" style="color: #113366;">APLUS</h2>
 		</div>
 		<div class="card-body">
-				<select id="semester" style="margin-left:50px">
-			<option value="">학기</option>
-			<option value="1">1학기</option>
-			<option value="2">2학기</option>
-			<option value="계절">계절학기</option>
-		</select>
-
-		<select id="category" style="margin-left:50px">
-			<option value="">구분</option>
-			<option value="공학전공">공학전공</option>
-			<option value="전공기반">전공기반</option>
-			<option value="기본소양">기본소양</option>
-			<option value="교양">교양</option>
-		</select>
-
-		<select id="grade" style="margin-left:50px">
-			<option value="">학점</option>
-			<option value="공학전공">공학전공</option>
-			<option value="전공기반">전공기반</option>
-			<option value="기본소양">기본소양</option>
-			<option value="교양">교양</option>
-		</select>
+			<select id="semester" style="margin-left:50px">
+				<option value="">학기</option>
+				<option value="1">1학기</option>
+				<option value="2">2학기</option>
+				<option value="계절">계절학기</option>
+			</select>
+	
+			<select id="category" style="margin-left:50px">
+				<option value="">구분</option>
+				<option value="공학전공">공학전공</option>
+				<option value="전공기반">전공기반</option>
+				<option value="기본소양">기본소양</option>
+				<option value="교양">교양</option>
+			</select>
+	
+			<select id="grade" style="margin-left:50px">
+				<option value="">학점</option>
+				<option value="A%2B">A+</option>
+				<option value="A0">A0</option>
+				<option value="A-">A-</option>
+				<option value="B%2B">B+</option>
+				<option value="B0">B0</option>
+				<option value="B-">B-</option>
+				<option value="C%2B">C+</option>
+				<option value="C0">C0</option>
+				<option value="C-">C-</option>
+				<option value="F">F</option>
+			</select>
 
 		<button class="btn btn-primary" style="margin-left:100px"
 		onclick = "search()">검색</button>
@@ -132,12 +136,37 @@
 			</thead>
 			<tbody>
 			<%
+				String filterSemester = request.getParameter("semester");
+				String filterCategory = request.getParameter("category");
+				String filterGrade = request.getParameter("grade");
+			
 				Database db = new Database();
 				db.connectDriver();
 				
 				String stid = request.getParameter("stid");
 				
-				ArrayList<Result> result = db.SelectResultQuery("select * from results where stid = " + stid);
+				String query = "select * from results where stid = " + stid;
+				
+				if (filterSemester != null) {
+					query = query + " and semester = " + filterSemester;
+				}
+				
+				ArrayList<Result> result = db.SelectResultQuery(query);
+				
+				ArrayList<String> fsuid = new ArrayList<String>();
+				for (Result r : result) {
+					fsuid.add(r.getSuid());
+				}
+				
+				HashMap<String, String> itc = db.SelectCategoryFromResults(fsuid);
+				
+				if (filterCategory != null) {
+					ArrayList<Result> nResult = new ArrayList<Result>();
+					for (Result r : result) {
+						if (itc.get(r.getSuid()).equals(filterCategory)) nResult.add(r);
+					}
+					result = nResult;
+				}
 				
 				for (Result r : result) {
 					%>
@@ -161,13 +190,30 @@ function chPW() {
 	var id = <%=request.getParameter("stid")%>;
 	window.location.href = "changePassword.jsp?mode=0&id=" + id;
 }
-
 function search() {
+	var id = <%=request.getParameter("stid")%>;
+	
 	var semester = document.getElementById("semester").value;
 	var category = document.getElementById("category").value;
 	var grade = document.getElementById("grade").value;
-
-
+	
+	var filterq = "&";
+	
+	if (semester !== "") {
+		filterq = filterq + "semester=" + semester;
+	}
+	
+	if (category !== "") {
+		if (filterq !== "&") filterq = filterq + "&";
+		filterq = filterq + "category=" + category;
+	}
+	
+	if (grade !== "") {
+		if (filterq !== "&") filterq = filterq + "&";
+		filterq = filterq + "grade=" + grade;
+	}
+	
+	if (filterq !== "&") window.location.href = "StudentMain.jsp?stid=" + id + filterq;
 }
 </script>
 </body>
