@@ -120,7 +120,7 @@ public class Database {
 		Statement stmt = conn.createStatement();
 		
 		int result = stmt.executeUpdate(sql);
-		
+		System.out.println(result+"행 업데이트");
 		conn.commit();
 		conn.setAutoCommit(true);
 		stmt.close();
