@@ -56,16 +56,16 @@
               <input type="text" id="stid" class="form-control" name="username" placeholder="학번 입력" required autofocus><BR>
               
               <select id=grade>
-              <option selected="selected" value="0">A+</option>
-              <option value="1">A0</option>
-              <option value="2">A-</option>
-              <option value="3">B+</option>
-              <option value="4">B0</option>
-              <option value="5">B-</option>
-              <option value="6">C+</option>
-              <option value="7">C0</option>
-              <option value="8">C-</option>
-              <option value="9">F</option>
+              <option selected="selected" value="A%2B">A+</option>
+              <option value="A0">A0</option>
+              <option value="A-">A-</option>
+              <option value="B%2B">B+</option>
+              <option value="B0">B0</option>
+              <option value="B-">B-</option>
+              <option value="C%2B">C+</option>
+              <option value="C0">C0</option>
+              <option value="C-">C-</option>
+              <option value="F">F</option>
               </select><BR>
               
               <button class="btn btn-lg btn-primary btn-block" onclick="updateRec()" >입력</button>
@@ -87,7 +87,9 @@
 	try{
 		
 		if(Integer.parseInt(request.getParameter("success")) == 0)
-			fail = "���대��媛� ��嫄곕�� 鍮�諛�踰��멸� ��由쎈����.";
+			fail = "잘못된 입력입니다.";
+		else if(Integer.parseInt(request.getParameter("success")) == -1)
+			fail = "잘못된 입력입니다.";
 	}catch(Exception e){}
 %>
 <script>
