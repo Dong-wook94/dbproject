@@ -85,7 +85,6 @@
 <%
 	String fail = "";
 	try{
-		
 		if(Integer.parseInt(request.getParameter("success")) == 0)
 			fail = "잘못된 입력입니다.";
 		else if(Integer.parseInt(request.getParameter("success")) == -1)
