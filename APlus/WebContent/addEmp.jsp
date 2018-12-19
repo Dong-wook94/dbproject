@@ -46,6 +46,8 @@ import="java.util.*" %>
 	<div align="right" style="width: 100%">
 		<button class="btn btn-primary" style="position: relative; right: 0"
 		onclick="chPW()">비밀번호변경</button>
+		<button class="btn btn-primary" style="position: relative; right: 0"
+			onclick="history.back(-1)">뒤로가기</button>
 	</div>
 	<div class="card align-middle" style="width:20rem; border-radius:20px;">
 		<div class="card-title" style="margin-top:30px;">

@@ -44,6 +44,10 @@
   </head>
  <body cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
 
+	<div align="right" style="width: 100%">
+		<button class="btn btn-primary" style="position: relative; right: 0"
+				onclick="history.back(-1)">뒤로가기</button>
+	</div>
 	<div class="card align-middle" style="width:20rem; border-radius:20px;">
 		<div class="card-title" style="margin-top:30px;">
 			<h2 class="card-title text-center" style="color:#113366;">APLUS</h2>
@@ -92,7 +96,9 @@
 	}catch(Exception e){}
 %>
 <script>
-
+function back(){
+	window.location.href = "EmployeeMain.jsp?eid="+<%=request.getParameter("eid")%>;
+}
 function updateRec(){
 	var suid = document.getElementById("suid").value;
 	var stid = document.getElementById("stid").value;

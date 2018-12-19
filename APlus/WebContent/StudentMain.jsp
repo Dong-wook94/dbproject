@@ -156,7 +156,7 @@
 					
 					String stid = request.getParameter("stid");
 					
-					String query = "select * from results r,subject s where r.suid = s.suid and r.stid = " + stid;
+					String query = "select * from results r,subject s where r.suid = s.suid AND r.semester=s.semester and r.stid = " + stid;
 					
 					if (filterSemester != null) {
 						if (filterSemester.equals("S")) {

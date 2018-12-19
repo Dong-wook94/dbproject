@@ -23,7 +23,7 @@ import="java.util.*" %>
 	
 	%>
 	<script>
-	window.location.href="EmployeeMain.jsp?eid="+<%=eid%>;
+	window.location.href="EmployeeMain.jsp?eid="+<%=request.getParameter("eid")%>;
 		</script>
 	
 </body>
