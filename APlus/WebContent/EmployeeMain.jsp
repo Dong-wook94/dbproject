@@ -48,6 +48,8 @@ body {
 	<div align="right" style="width: 100%">
 		<button class="btn btn-primary" style="position: relative; right: 0"
 			onclick="chPW()">비밀번호 변경</button>
+		<button class="btn btn-primary" style="position: relative; right: 0"
+			onclick="logout()">로그아웃</button>
 	</div>
 	<div class="card align-middle"
 		style="width: 20rem; border-radius: 20px;">
@@ -75,6 +77,9 @@ body {
 	</div>
 
 	<script>
+		function logout(){
+			window.location.href = "index.jsp?";
+		}
 		function insertStudent() {
 			var id =<%=request.getParameter("eid")%>;
 			window.location.href = "addStudent.jsp?eid="+id;

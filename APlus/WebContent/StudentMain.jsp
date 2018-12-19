@@ -83,8 +83,10 @@
 	<div align="right" style="width: 100%">
 		<button class="btn btn-primary" style="position: relative; right: 0"
 			onclick="chPW()">비밀번호 변경</button>
+			<button class="btn btn-primary" style="position: relative; right: 0"
+			onclick="logout()">로그아웃</button>
 	</div>
-	<div class="card align-middle" style="width: 700px; border-radius: 20px;">
+	<div class="card align-middle" style="width: 900px; border-radius: 20px;">
 		<div class="card-title" style="margin-top: 30px;">
 			<h2 class="card-title text-center" style="color: #113366;">APLUS</h2>
 		</div>
@@ -135,7 +137,8 @@
 					<tr>
 						<th scope="cols">학번</th>
 						<th scope="cols">강의번호</th>
-						<th scope="cols">구분</th>
+						<th scope="cols" width="400">강의명</th>
+						<th scope="cols" width="300">구분</th>
 						<th scope="cols">학기</th>
 						<th scope="cols">성적</th>
 						<th scope="cols">재수강­</th>
@@ -153,39 +156,31 @@
 					
 					String stid = request.getParameter("stid");
 					
-					String query = "select * from results where stid = " + stid;
+					String query = "select * from results r,subject s where r.suid = s.suid and r.stid = " + stid;
 					
 					if (filterSemester != null) {
-						query = query + " and semester like '%' || '" + filterSemester + "'";
-					}
-					
-					if (filterGrade != null) {
-						query = query + " and grade = '" + filterGrade + "'";
-					}
-					
-					ArrayList<Result> result = db.SelectResultQuery(query);
-					
-					ArrayList<String> fsuid = new ArrayList<String>();
-					for (Result r : result) {
-						fsuid.add(r.getSuid());
-					}
-					
-					HashMap<String, String> itc = db.SelectCategoryFromResults(fsuid);
-					
-					if (filterCategory != null) {
-						ArrayList<Result> nResult = new ArrayList<Result>();
-						for (Result r : result) {
-							if (itc.get(r.getSuid()).equals(filterCategory)) nResult.add(r);
+						if (filterSemester.equals("S")) {
+							query = query + " and (r.semester like '%' || 'S' or r.semester like '%' || 'W')";
+						} else {
+							query = query + " and r.semester like '%' || '" + filterSemester + "'";
 						}
-						result = nResult;
+					}
+					if (filterCategory != null){
+						query = query + " and s.sufield = '" + filterCategory + "'";
+					}
+					if (filterGrade != null) {
+						query = query + " and r.grade = '" + filterGrade + "'";
 					}
 					
-					for (Result r : result) {
+					ArrayList<JoinResultSubject> result = db.SelectJoinResultSubjectQuery(query);
+					
+					for (JoinResultSubject r : result) {
 						%>
 						<tr>
 							<th scopre="row"> <%= r.getStid() %> </th>
 							<th scopre="row"> <%= r.getSuid() %> </th>
-							<th scopre="row"> <%= itc.get(r.getSuid()) %> </th>
+							<th scopre="row"> <%= r.getSuname() %> </th>
+							<th scopre="row"> <%= r.getSufield() %> </th>
 							<th scopre="row"> <%= r.getSemester() %> </th>
 							<th scopre="row"> <%= r.getGrade() %> </th>
 							<th scopre="row"> <%= ((r.getRetry() == 0) ? "X" : "O") %> </th>
@@ -209,7 +204,7 @@
 					int cntGrade = 0;
 					int totalCredit = 0;
 					if (result.size() != 0) {
-						for (Result r : result) {
+						for (JoinResultSubject r : result) {
 							if (r.getGrade().equals("A+")) avgGrade += 4.3f;
 							else if (r.getGrade().equals("A0")) avgGrade += 4.0f;
 							else if (r.getGrade().equals("A-")) avgGrade += 3.7f;
@@ -223,8 +218,9 @@
 						}
 						avgGrade = avgGrade / cntGrade;
 
-						fsuid.clear();
-						for (Result r : result) {
+						ArrayList<String> fsuid = new ArrayList<String>();
+						//fsuid.clear();
+						for (JoinResultSubject r : result) {
 							fsuid.add(r.getSuid());
 						}
 						totalCredit = db.GetTotalCredit(fsuid);
@@ -241,6 +237,9 @@
 function chPW() {
 	var id = <%=request.getParameter("stid")%>;
 	window.location.href = "changePassword.jsp?mode=0&id=" + id;
+}
+function logout(){
+	window.location.href = "changePassword.jsp?";
 }
 function search() {
 	var id = <%=request.getParameter("stid")%>;

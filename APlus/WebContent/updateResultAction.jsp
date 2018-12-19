@@ -22,7 +22,7 @@
 
 	ArrayList<Student> stList = db.SelectStudentQuery("select * from student where stid = " + stid);
 
-	if (success == 1 && !stList.isEmpty()) {
+	if (success != 0 && !stList.isEmpty()) {
 		success = 1;
 	} else {
 		success = -1;//학번이 없는경우

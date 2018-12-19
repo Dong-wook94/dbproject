@@ -50,8 +50,8 @@
 		</div>
 		<div class="card-body">
               <h5 class="form-signin-heading">비밀번호 변경</h5>
-              <input type="text" id="old_pw" class="form-control" name="username" placeholder="기존비밀번호" required autofocus><BR>
-              <input type="text" id="new_pw" class="form-control" name="username" placeholder="새 비밀번호" required autofocus><BR>
+              <input type="password" id="old_pw" class="form-control" name="username" placeholder="기존비밀번호" required autofocus><BR>
+              <input type="password" id="new_pw" class="form-control" name="username" placeholder="새 비밀번호" required autofocus><BR>
               <input type="password" id="new_pw2" class="form-control" name="password" placeholder="새 비밀번호 확인" required><br>
 
               <button class="btn btn-lg btn-primary btn-block" onclick="chPw()" >변경</button>

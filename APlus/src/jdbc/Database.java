@@ -100,6 +100,22 @@ public class Database {
 		stmt.close();
 		return aList;
 	}
+	public ArrayList<JoinResultSubject> SelectJoinResultSubjectQuery(String query) throws Exception{
+		conn.setAutoCommit(false);//ø¿≈‰ƒøπ‘
+		Statement stmt = conn.createStatement();
+
+		ResultSet rs = stmt.executeQuery(query);
+		ArrayList<JoinResultSubject> aList = new ArrayList<JoinResultSubject>();
+		while (rs.next()) {
+			aList.add(new JoinResultSubject(rs.getInt("stid"),rs.getString("suid"),rs.getString("suname"),rs.getString("sufield"),rs.getString("semester"),
+					rs.getString("grade"),rs.getInt("retry")));
+		}
+		rs.close();
+		conn.commit();
+		conn.setAutoCommit(true);
+		stmt.close();
+		return aList;
+	}
 	public ArrayList<Subject> SelectSubjectQuery(String query) throws Exception{
 		conn.setAutoCommit(false);//ø¿≈‰ƒøπ‘
 		Statement stmt = conn.createStatement();
@@ -116,6 +132,7 @@ public class Database {
 		stmt.close();
 		return aList;
 	}
+	
 	public HashMap<String, String> SelectCategoryFromResults(ArrayList<String> suid) throws Exception {
 		conn.setAutoCommit(false);
 		Statement stmt = conn.createStatement();
