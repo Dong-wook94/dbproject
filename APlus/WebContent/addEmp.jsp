@@ -89,19 +89,7 @@ import="java.util.*" %>
 }catch(Exception e){}
 %>
 <script>
-<%
-	Database db = new Database();
-	db.connectDriver();
 
-
-	String id = request.getParameter("id");
-	String name = request.getParameter("name");
-	String employee = request.getParameter("employee");
-
-	if(id!=null && name!=null && employee!=null)
-		db.DMLCustomQuery("insert into emp values (" +id+ ", '" + name+ "', '"+employee+"', '1234')");
-
-	%>
 
 	function chPw() {
 		var old_pw = document.getElementById("old_pw").value;
@@ -123,8 +111,8 @@ import="java.util.*" %>
 		var select = document.getElementById("employee");
 		var employee = select.options[select.selectedIndex].value;
 
-		frm.target="por"
-		frm.action="addEmp.jsp?id="+id+"&name="+name+"&employee="+employee;
+		frm.target="_self"
+		frm.action="addEmpAction.jsp?eid="+<%=request.getParameter("eid")%>+"&id="+id+"&name="+name+"&employee="+employee;
 		frm.submit();
 	}
 </script>
