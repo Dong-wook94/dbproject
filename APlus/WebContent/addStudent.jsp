@@ -91,20 +91,7 @@ style="width: 20rem; border-radius: 20px;">
 
 </body>
 <script>
-	<%
-	Database db = new Database();
-	db.connectDriver();
-
-
-	String id = request.getParameter("id");
-	String name = request.getParameter("name");
-	String major = request.getParameter("major");
-	String year = request.getParameter("year");
-
-	if(id!=null && name!=null && major!=null)
-		db.DMLCustomQuery("insert into student values (" +id+ ",'" + name+ "', '1234', '"+major+"', '"+year+"',0)");
-
-	%>
+	
 
 
 
@@ -113,9 +100,9 @@ style="width: 20rem; border-radius: 20px;">
 		var name = document.getElementById("name").value;
 		var major = document.getElementById("major").value;
 		var year = document.getElementById("year").value;
-
-		frm.target="por"
-		frm.action="addStudent.jsp?id="+id+"&name="+name+"&major="+major+"&year="+year;
+		
+		frm.target="_self"
+		frm.action="addStdAction.jsp?eid="+<%=request.getParameter("eid")%>+"&id="+id+"&name="+name+"&major="+major+"&year="+year;
 		frm.submit();
 
 		
